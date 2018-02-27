@@ -39,31 +39,38 @@ import (
 	"time"
 )
 
-var gridByteBuffer bytes.Buffer
-var infoLog = log.New(os.Stdout, "INFO ", log.Flags())
-var statsLog = log.New(os.Stdout, "STATS ", log.Flags())
-var traceLog = log.New(os.Stdout, "TRACE ", log.Flags())
-var errorLog = log.New(os.Stderr, "ERROR ", log.Flags())
+var (
+	gridByteBuffer bytes.Buffer
+	infoLog        = log.New(os.Stdout, "INFO ", log.Flags())
+	statsLog       = log.New(os.Stdout, "STATS ", log.Flags())
+	traceLog       = log.New(os.Stdout, "TRACE ", log.Flags())
+	errorLog       = log.New(os.Stderr, "ERROR ", log.Flags())
+)
 
-var mapperPlugin func(*monstachemap.MapperPluginInput) (*monstachemap.MapperPluginOutput, error)
-var mapEnvs map[string]*executionEnv = make(map[string]*executionEnv)
-var mapIndexTypes map[string]*indexTypeMapping = make(map[string]*indexTypeMapping)
-var fileNamespaces map[string]bool = make(map[string]bool)
-var patchNamespaces map[string]bool = make(map[string]bool)
-var tmNamespaces map[string]bool = make(map[string]bool)
-var routingNamespaces map[string]bool = make(map[string]bool)
+var (
+	mapperPlugin      func(*monstachemap.MapperPluginInput) (*monstachemap.MapperPluginOutput, error)
+	mapEnvs           map[string]*executionEnv     = make(map[string]*executionEnv)
+	mapIndexTypes     map[string]*indexTypeMapping = make(map[string]*indexTypeMapping)
+	fileNamespaces    map[string]bool              = make(map[string]bool)
+	patchNamespaces   map[string]bool              = make(map[string]bool)
+	tmNamespaces      map[string]bool              = make(map[string]bool)
+	routingNamespaces map[string]bool              = make(map[string]bool)
+)
 
 var chunksRegex = regexp.MustCompile("\\.chunks$")
 var systemsRegex = regexp.MustCompile("system\\..+$")
 
-const version = "4.1.2"
-const mongoURLDefault string = "localhost"
-const resumeNameDefault string = "default"
-const elasticMaxConnsDefault int = 10
-const elasticClientTimeoutDefault int = 60
-const elasticMaxDocsDefault int = 1000
-const gtmChannelSizeDefault int = 512
-const typeFromFuture string = "_doc"
+// Application default settings
+const (
+	version                            = "4.1.3"
+	mongoURLDefault             string = "localhost"
+	resumeNameDefault           string = "default"
+	elasticMaxConnsDefault      int    = 10
+	elasticClientTimeoutDefault int    = 60
+	elasticMaxDocsDefault       int    = 1000
+	gtmChannelSizeDefault       int    = 512
+	typeFromFuture              string = "_doc"
+)
 
 type stringargs []string
 
